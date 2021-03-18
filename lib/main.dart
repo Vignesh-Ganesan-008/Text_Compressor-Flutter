@@ -14,12 +14,36 @@ class _MyAppState extends State<MyApp> {
   static const List<DropdownMenuItem> items = [
     DropdownMenuItem(child: Text("Huffman"), value: 0),
     DropdownMenuItem(child: Text("Run-Length"), value: 1),
-    DropdownMenuItem(child: Text("Variable-Length"), value: 2),
-    DropdownMenuItem(child: Text("Lempel-Ziv-Welch"), value: 3),
-    DropdownMenuItem(child: Text("Delta"), value: 4),
+    DropdownMenuItem(child: Text("Lempel-Ziv-Welch"), value: 2),
+    DropdownMenuItem(child: Text("Delta"), value: 3),
   ];
 
   TextEditingController input = TextEditingController();
+
+  String codedText = "";
+  // ignore: non_constant_identifier_names
+  void RunLength() {
+    String str = input.text;
+    int n = str.length;
+    codedText = "";
+    for (int i = 0; i < n; i++) {
+      int count = 1;
+      while (i < n - 1 && str[i] == str[i + 1]) {
+        count++;
+        i++;
+      }
+      //print(str[i] + "" + count.toString());
+      codedText += str[i] + "" + count.toString();
+    }
+  }
+
+  void chooser() {
+    if (value == 0) {
+    } else if (value == 1) {
+      RunLength();
+    } else if (value == 2) {
+    } else if (value == 3) {}
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +70,9 @@ class _MyAppState extends State<MyApp> {
               maxLines: 5,
               decoration: InputDecoration(labelText: "Enter text here:"),
               onChanged: (_) {
-                setState(() {});
+                setState(() {
+                  chooser();
+                });
               },
             ),
             Padding(
@@ -69,7 +95,7 @@ class _MyAppState extends State<MyApp> {
               padding: const EdgeInsets.only(left: 10.0, right: 10.0),
               child: Center(
                 child: Text(
-                  input.text,
+                  codedText,
                   style: TextStyle(fontSize: 20),
                 ),
               ),
