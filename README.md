@@ -1,6 +1,6 @@
 # Text_Compressor
 
-A new Flutter project.
+An app used for encoding text using various compress algorithms.
 
 ## Getting Started
 
